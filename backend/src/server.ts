@@ -16,11 +16,12 @@ app.use(morgan("tiny"));
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://tiny-link-bjp8.vercel.app/"],
+    origin: ["http://localhost:5173", "https://tiny-link-bjp8.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
 );
+app.options("*", cors());
 app.use(rateLimit({ windowMs: 60 * 1000, max: 120 }));
 
 app.use("/api/links", linksRouter);
