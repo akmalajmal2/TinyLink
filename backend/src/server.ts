@@ -10,10 +10,6 @@ import linksRouter from "./routes/links";
 import redirectRouter from "./routes/redirect";
 
 const app = express();
-app.use(helmet());
-app.use(express.json());
-app.use(morgan("tiny"));
-
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://tiny-link-bjp8.vercel.app"],
@@ -22,6 +18,10 @@ app.use(
   })
 );
 app.options("*", cors());
+app.use(helmet());
+app.use(express.json());
+app.use(morgan("tiny"));
+
 app.use(rateLimit({ windowMs: 60 * 1000, max: 120 }));
 
 app.use("/api/links", linksRouter);
